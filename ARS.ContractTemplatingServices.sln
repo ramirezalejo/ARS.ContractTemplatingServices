@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARS.ContractTemplating.Functions", "ARS.ContractTemplating.Functions\ARS.ContractTemplating.Functions.csproj", "{9622C4F6-B43B-45EE-B815-9B3DF0852E1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARS.ContractTemplating.Domain", "ARS.ContractTemplating.Domain\ARS.ContractTemplating.Domain.csproj", "{09E4B900-95D1-440E-9D2D-B64B5774389D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARS.ContractTemplating.Services", "ARS.ContractTemplating.Services\ARS.ContractTemplating.Services.csproj", "{8890D9F6-C1D3-4CAC-885B-6669A2C0D8E2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9622C4F6-B43B-45EE-B815-9B3DF0852E1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9622C4F6-B43B-45EE-B815-9B3DF0852E1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9622C4F6-B43B-45EE-B815-9B3DF0852E1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9622C4F6-B43B-45EE-B815-9B3DF0852E1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09E4B900-95D1-440E-9D2D-B64B5774389D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09E4B900-95D1-440E-9D2D-B64B5774389D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09E4B900-95D1-440E-9D2D-B64B5774389D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09E4B900-95D1-440E-9D2D-B64B5774389D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8890D9F6-C1D3-4CAC-885B-6669A2C0D8E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8890D9F6-C1D3-4CAC-885B-6669A2C0D8E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8890D9F6-C1D3-4CAC-885B-6669A2C0D8E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8890D9F6-C1D3-4CAC-885B-6669A2C0D8E2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
