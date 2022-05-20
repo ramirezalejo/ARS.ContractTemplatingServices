@@ -1,0 +1,35 @@
+name: 1.$(Date:yy)$(DayOfYear).$(BuildID)
+
+variables:
+  nugetProjects: '**/ARS.ContractTemplating.Domain.csproj' 
+  # projectName global variable is required for building Azure function, 
+  #   it determines which projects will be published to the Azure function app
+  projectName: 'ARS.ContractTemplating.Functions'  
+
+
+  # function app must be deployed and configured on Azure before this pipeline runs
+  appName: 'ContractTemplating'
+
+  # Azure app type. Must be set to 'functionApp' when deploying Azure function 
+  appType: 'functionApp'
+
+
+trigger:
+- develop
+- release/*
+
+resources:
+ repositories:
+   - repository: templates
+     type: github
+     name: ramirezalejo/BuildTemplates
+
+
+stages:
+
+# Builds, runs unit tests and code analysis, and publishes the Azure function artifact to the pipeline artifact feed.
+- template: netCore2/buildStage.yml@templates
+  parameters:
+    publishArtifacts: true
+    publishNugets: true
+    useNugetConfig: true
