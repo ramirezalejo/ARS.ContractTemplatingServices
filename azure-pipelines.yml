@@ -23,6 +23,7 @@ resources:
    - repository: templates
      type: github
      name: ramirezalejo/BuildTemplates
+     endpoint: ramirezalejo
 
 
 stages:
