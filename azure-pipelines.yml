@@ -33,4 +33,3 @@ stages:
   parameters:
     publishArtifacts: true
     publishNugets: true
-    useNugetConfig: true
