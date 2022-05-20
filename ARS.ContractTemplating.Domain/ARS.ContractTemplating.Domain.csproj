@@ -5,9 +5,11 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <FileVersion><!--Build.BuildNumber-->.0</FileVersion>
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.0.0</AssemblyVersion>
         <Version><!--Build.BuildNumber--></Version>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <NoWarn>CS7035</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
