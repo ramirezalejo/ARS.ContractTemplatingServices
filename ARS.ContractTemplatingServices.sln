@@ -6,6 +6,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARS.ContractTemplating.Doma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARS.ContractTemplating.Services", "ARS.ContractTemplating.Services\ARS.ContractTemplating.Services.csproj", "{8890D9F6-C1D3-4CAC-885B-6669A2C0D8E2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0AF7003B-EB81-4957-AD87-A7DD70C63113}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARS.Contractemplating.Services.Test", "ARS.Contractemplating.Services.Test\ARS.Contractemplating.Services.Test.csproj", "{BCCCF297-352C-4389-8514-7F10BF8B6037}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARS.ContractTemplating.Domain.Tests", "ARS.ContractTemplating.Domain.Tests\ARS.ContractTemplating.Domain.Tests.csproj", "{990BFBE5-7D12-42E4-857E-6A6C3649FC0B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +30,17 @@ Global
 		{8890D9F6-C1D3-4CAC-885B-6669A2C0D8E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8890D9F6-C1D3-4CAC-885B-6669A2C0D8E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8890D9F6-C1D3-4CAC-885B-6669A2C0D8E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCCCF297-352C-4389-8514-7F10BF8B6037}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCCCF297-352C-4389-8514-7F10BF8B6037}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCCCF297-352C-4389-8514-7F10BF8B6037}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCCCF297-352C-4389-8514-7F10BF8B6037}.Release|Any CPU.Build.0 = Release|Any CPU
+		{990BFBE5-7D12-42E4-857E-6A6C3649FC0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{990BFBE5-7D12-42E4-857E-6A6C3649FC0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{990BFBE5-7D12-42E4-857E-6A6C3649FC0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{990BFBE5-7D12-42E4-857E-6A6C3649FC0B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BCCCF297-352C-4389-8514-7F10BF8B6037} = {0AF7003B-EB81-4957-AD87-A7DD70C63113}
+		{990BFBE5-7D12-42E4-857E-6A6C3649FC0B} = {0AF7003B-EB81-4957-AD87-A7DD70C63113}
 	EndGlobalSection
 EndGlobal
