@@ -43,10 +43,10 @@ public class File
     /// </summary>
     [JsonIgnore]
     public int CompressedSize { get; set; }
-/// <summary>
-/// Validation for type of content to check if is a valid file
-/// </summary>
-/// <returns>bool</returns>
+    /// <summary>
+    /// Validation for type of content to check if is a valid file
+    /// </summary>
+    /// <returns>bool</returns>
     public bool IsOkToCompress()
     {
         if (ContentType != null)
@@ -58,7 +58,7 @@ public class File
                 return low.EndsWith("/wav");
             if (low.StartsWith("text/"))
                 return true;
-            if(low.StartsWith("application/"))
+            if (low.StartsWith("application/"))
             {
                 switch(low.Split('/')[1])
                 {

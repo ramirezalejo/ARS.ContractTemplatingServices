@@ -1,6 +1,7 @@
 using NUnit.Framework;
 
 namespace ARS.ContractTemplating.Domain.Tests.Models;
+[TestFixture]
 public class FileTests
 {
     [Test]
