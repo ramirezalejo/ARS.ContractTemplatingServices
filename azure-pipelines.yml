@@ -33,3 +33,4 @@ stages:
   parameters:
     publishArtifacts: true
     publishNugets: true
+    testCoverageThreshold: 60

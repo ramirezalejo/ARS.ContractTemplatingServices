@@ -18,7 +18,12 @@ public class FileTests
     {
         var file = new ARS.ContractTemplating.Domain.Models.File()
         {
-            ContentType = contenType
+            ContentType = contenType,
+            FileName = "Test1",
+            Owner = "Me",
+            State = 1,
+            OriginalSize = 1,
+            CompressedSize = 1
         };
         Assert.AreEqual(isOk, file.IsOkToCompress());
         
