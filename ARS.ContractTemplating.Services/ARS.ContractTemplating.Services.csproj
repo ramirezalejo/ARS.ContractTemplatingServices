@@ -16,4 +16,9 @@
       <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\ARS.ContractTemplating.Domain\ARS.ContractTemplating.Domain.csproj" />
+    </ItemGroup>
+    
+
 </Project>

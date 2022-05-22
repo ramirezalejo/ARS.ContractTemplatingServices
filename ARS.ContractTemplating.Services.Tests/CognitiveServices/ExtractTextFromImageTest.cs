@@ -1,3 +1,4 @@
+using ARS.ContractTemplating.Domain.Contracts;
 using ARS.ContractTemplating.Services.CognitiveServices;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
@@ -9,13 +10,13 @@ namespace ARS.ContractTemplating.Services.Tests.CognitiveServices;
 public class ExtractTextFromImageTest
 {
     private ILogger? _logger;
-    private HttpClient? _httpClient;
+    private ICognitiveServicesClient? _cognitiveServicesClient;
     [Test]
     public void ExtractTextFromImage_Constructor_Test()
     {
         _logger = Substitute.For<ILogger>();
-        _httpClient = Substitute.For<HttpClient>();
-        var extractTextFromImage = new ExtractTextFromImage(_httpClient, _logger);
+        _cognitiveServicesClient = Substitute.For<ICognitiveServicesClient>();
+        var extractTextFromImage = new ExtractTextFromImage(_cognitiveServicesClient, _logger);
         Assert.IsNotNull(extractTextFromImage);
     }
 }

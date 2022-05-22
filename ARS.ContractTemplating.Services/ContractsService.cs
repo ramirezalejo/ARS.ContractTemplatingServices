@@ -1,26 +1,26 @@
 using ARS.ContractTemplating.Domain.Contracts;
 using Microsoft.Extensions.Logging;
 
-namespace ARS.ContractTemplating.Services.CognitiveServices;
+namespace ARS.ContractTemplating.Services;
 
 /// <summary>
-/// Contains the logic to extract text from images
+/// Contracts Service
 /// </summary>
-public class ExtractTextFromImage
+public class ContractsService
 {
     private readonly ICognitiveServicesClient _cognitiveServicesClient;
     private readonly ILogger _logger;
 
     /// <summary>
-    /// Constructor injecting the HttpClient and Logger instances
+    /// Constructor
     /// </summary>
     /// <param name="cognitiveServicesClient"></param>
     /// <param name="logger"></param>
-    public ExtractTextFromImage(ICognitiveServicesClient cognitiveServicesClient, ILogger logger)
+    public ContractsService(ICognitiveServicesClient cognitiveServicesClient, ILogger logger)
     {
         _cognitiveServicesClient = cognitiveServicesClient;
         _logger = logger;
     }
     
-    
+    //public async Task GenerateContract()
 }
