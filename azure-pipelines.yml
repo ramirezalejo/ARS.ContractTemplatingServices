@@ -1,7 +1,7 @@
 name: 1.$(Date:yy)$(DayOfYear).$(BuildID)
 
 variables:
-  nugetProjects: '**/ARS.ContractTemplating.Domain.csproj' 
+  nugetProjects: '**/ARS.ContractTemplating.Domain.csproj;**/ARS.ContractTemplating.Infrastructure.csproj' 
   # projectName global variable is required for building Azure function, 
   #   it determines which projects will be published to the Azure function app
   projectName: 'ARS.ContractTemplating.Functions'  
