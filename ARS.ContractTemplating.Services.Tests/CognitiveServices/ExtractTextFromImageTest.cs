@@ -8,8 +8,8 @@ namespace ARS.ContractTemplating.Services.Tests.CognitiveServices;
 [TestFixture]
 public class ExtractTextFromImageTest
 {
-    private ILogger _logger;
-    private HttpClient _httpClient;
+    private ILogger? _logger;
+    private HttpClient? _httpClient;
     [Test]
     public void ExtractTextFromImage_Constructor_Test()
     {
