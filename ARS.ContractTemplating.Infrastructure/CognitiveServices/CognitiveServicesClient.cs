@@ -1,4 +1,5 @@
 using ARS.ContractTemplating.Domain.Contracts;
+using ARS.ContractTemplating.Domain.Contracts.Infrastructure;
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
 using Microsoft.Extensions.Logging;

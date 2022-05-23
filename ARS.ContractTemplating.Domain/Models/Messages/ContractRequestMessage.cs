@@ -7,7 +7,7 @@ public class ContractRequestMessage
     /// <summary>
     /// List of file to use for contract
     /// </summary>
-    public ContractRequestFile[]? File { get; set; }
+    public ContractRequestFile[]? Files { get; set; }
 
     /// <summary>
     /// Contract Requestor/ Request Owner

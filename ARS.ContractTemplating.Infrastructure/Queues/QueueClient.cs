@@ -1,4 +1,5 @@
 using ARS.ContractTemplating.Domain.Contracts;
+using ARS.ContractTemplating.Domain.Contracts.Infrastructure;
 using Azure.Storage.Queues;
 
 namespace ARS.ContractTemplating.Infrastructure.Queues;
@@ -6,7 +7,7 @@ namespace ARS.ContractTemplating.Infrastructure.Queues;
 /// <summary>
 /// Wrapper for Queue client from SDK
 /// </summary>
-public class QueueClient : Azure.Storage.Queues.QueueClient, IQueue
+public class QueueClient : Azure.Storage.Queues.QueueClient, IQueueClient
 {
     /// <summary>
     /// Constructor matching the base

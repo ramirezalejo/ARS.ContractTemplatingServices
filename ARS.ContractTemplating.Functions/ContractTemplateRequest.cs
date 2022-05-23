@@ -1,5 +1,9 @@
+using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Threading;
+using ARS.ContractTemplating.Domain.Contracts.Services;
+using ARS.ContractTemplating.Domain.Models.Messages;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 
@@ -10,14 +14,17 @@ namespace ARS.ContractTemplating.Functions;
 /// </summary>
 public class ContractTemplateRequest
 {
+    private readonly IContractsService _contractService;
     private readonly ILogger _logger;
 
     /// <summary>
     /// ContractTemplateRequest Azure Function Constructor
     /// </summary>
+    /// <param name="contractService"></param>
     /// <param name="logger"></param>
-    public ContractTemplateRequest(ILogger logger)
+    public ContractTemplateRequest(IContractsService contractService, ILogger logger)
     {
+        _contractService = contractService;
         _logger = logger;
     }
 
@@ -27,10 +34,11 @@ public class ContractTemplateRequest
     /// <param name="myQueueItem"></param>
     /// <param name="cancellationToken"></param>
     [FunctionName("ContractTemplateRequest")]
-    public async Task RunAsync([QueueTrigger("myqueue", Connection = "%StorageConnectionString%")] string myQueueItem,
+    public async Task RunAsync([QueueTrigger("ContractRequest", Connection = "StorageConnectionString")] string myQueueItem,
         CancellationToken cancellationToken)
     {
         _logger.LogInformation("C# Queue trigger function processed: {MyQueueItem}", myQueueItem);
-        await Task.Delay(3000, cancellationToken);
+        var request = JsonSerializer.Deserialize<ContractRequestMessage>(myQueueItem);
+        await _contractService.GenerateContract(request ?? throw new InvalidOperationException("Queue Message cannot be deserialized to ContractRequestMessage object"));
     }
 }

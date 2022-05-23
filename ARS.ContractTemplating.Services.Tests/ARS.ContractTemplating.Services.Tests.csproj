@@ -26,4 +26,8 @@
       <ProjectReference Include="..\ARS.ContractTemplating.Services\ARS.ContractTemplating.Services.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="CognitiveServices" />
+    </ItemGroup>
+
 </Project>

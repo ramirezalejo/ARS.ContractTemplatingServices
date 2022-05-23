@@ -1,4 +1,4 @@
-namespace ARS.ContractTemplating.Domain.Contracts;
+namespace ARS.ContractTemplating.Domain.Contracts.Infrastructure;
 
 /// <summary>
 /// Interface for Blob interactions

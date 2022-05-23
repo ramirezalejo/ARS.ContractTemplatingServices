@@ -1,4 +1,7 @@
-using ARS.ContractTemplating.Domain.Contracts;
+using ARS.ContractTemplating.Domain.Contracts.Infrastructure;
+using ARS.ContractTemplating.Domain.Contracts.Services;
+using ARS.ContractTemplating.Domain.Enums;
+using ARS.ContractTemplating.Domain.Models.Messages;
 using Microsoft.Extensions.Logging;
 
 namespace ARS.ContractTemplating.Services;
@@ -6,7 +9,7 @@ namespace ARS.ContractTemplating.Services;
 /// <summary>
 /// Contracts Service
 /// </summary>
-public class ContractsService
+public class ContractsService : IContractsService
 {
     private readonly ICognitiveServicesClient _cognitiveServicesClient;
     private readonly ILogger _logger;
@@ -21,6 +24,16 @@ public class ContractsService
         _cognitiveServicesClient = cognitiveServicesClient;
         _logger = logger;
     }
-    
-    //public async Task GenerateContract()
+
+    /// <summary>
+    /// Generates the contract and uploads it to the storage
+    /// </summary>
+    /// <param name="requestMessage"></param>
+    public async Task GenerateContract(ContractRequestMessage requestMessage)
+    {
+        var buyerFile = requestMessage?.Files?.FirstOrDefault(x => x.FileRoleType == FileRoleType.Buyer);
+        var buyerDataFromFile = buyerFile is not null
+            ? await _cognitiveServicesClient.ReadFileUrl(buyerFile.FilePath ?? throw new InvalidOperationException())
+            : new List<string>();
+    }
 }

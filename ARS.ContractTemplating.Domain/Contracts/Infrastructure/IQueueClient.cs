@@ -1,8 +1,8 @@
-namespace ARS.ContractTemplating.Domain.Contracts;
+namespace ARS.ContractTemplating.Domain.Contracts.Infrastructure;
 /// <summary>
 /// Wrapper for Queue interactions
 /// </summary>
-public interface IQueue
+public interface IQueueClient
 {
     /// <summary>
     /// Publishes message to the queue

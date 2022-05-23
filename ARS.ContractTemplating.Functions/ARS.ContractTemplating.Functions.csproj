@@ -24,4 +24,9 @@
             <CopyToPublishDirectory>Never</CopyToPublishDirectory>
         </None>
     </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\ARS.ContractTemplating.Domain\ARS.ContractTemplating.Domain.csproj" />
+      <ProjectReference Include="..\ARS.ContractTemplating.Infrastructure\ARS.ContractTemplating.Infrastructure.csproj" />
+      <ProjectReference Include="..\ARS.ContractTemplating.Services\ARS.ContractTemplating.Services.csproj" />
+    </ItemGroup>
 </Project>
