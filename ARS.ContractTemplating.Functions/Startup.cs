@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using ARS.ContractTemplating.Domain.Contracts.Infrastructure;
 using ARS.ContractTemplating.Domain.Contracts.Services;
@@ -15,6 +16,7 @@ namespace ARS.ContractTemplating.Functions;
 /// <summary>
 /// Startup for functions to initialize dependencies
 /// </summary>
+[ExcludeFromCodeCoverage]
 public class Startup : FunctionsStartup
 {
     /// <summary>
