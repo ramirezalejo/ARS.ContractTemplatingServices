@@ -1,4 +1,4 @@
-using ARS.ContractTemplating.Infrastructure.Blobs;
+//using ARS.ContractTemplating.Infrastructure.Blobs;
 using NUnit.Framework;
 
 namespace ARS.ContractTemplating.Infrastructure.Tests.Blobs;
@@ -10,10 +10,11 @@ public class BlobClientTests
     public void UploadBlockAsync_Succeeded()
     {
         //Arrange
-        var blobClient = new BlobClient("UseDevelopmentStorage=true");
+        /*var blobClient = new BlobClient("UseDevelopmentStorage=true");
         var blockId = "blockId";
         var block = new byte[] { 1, 2, 3, 4, 5 };
         var memoryStream = new System.IO.MemoryStream(block);
+        */
 
 
         //Act
