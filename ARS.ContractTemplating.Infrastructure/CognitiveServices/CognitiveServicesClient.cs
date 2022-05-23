@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using ARS.ContractTemplating.Domain.Contracts;
 using ARS.ContractTemplating.Domain.Contracts.Infrastructure;
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
@@ -8,6 +9,7 @@ namespace ARS.ContractTemplating.Infrastructure.CognitiveServices;
 /// <summary>
 /// Client to integrate with cognitive services
 /// </summary>
+[ExcludeFromCodeCoverage]
 public class CognitiveServicesClient : ComputerVisionClient, ICognitiveServicesClient
 {
     private readonly ILogger _logger;
