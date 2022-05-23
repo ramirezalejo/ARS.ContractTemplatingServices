@@ -1,7 +1,10 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace ARS.ContractTemplating.Domain.Models.Messages;
 /// <summary>
 /// Model for ContractRequest Queue and Interactions
 /// </summary>
+[ExcludeFromCodeCoverage]
 public class ContractRequestMessage
 {
     /// <summary>

@@ -35,7 +35,7 @@ public class CognitiveServicesClient : ComputerVisionClient, ICognitiveServicesC
         var textHeaders = await this.ReadAsync(sourceFileUrl);
         // After the request, get the operation location (operation ID)
         string operationLocation = textHeaders.OperationLocation;
-        Thread.Sleep(2000);
+        //await Task.Delay(2000);
 
         // Retrieve the URI where the extracted text will be stored from the Operation-Location header.
         // We only need the ID and not the full URL

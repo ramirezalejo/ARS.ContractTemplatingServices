@@ -1,4 +1,3 @@
-using ARS.ContractTemplating.Domain.Contracts;
 using ARS.ContractTemplating.Domain.Contracts.Infrastructure;
 using Azure.Storage.Blobs;
 

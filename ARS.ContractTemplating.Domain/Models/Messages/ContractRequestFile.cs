@@ -1,9 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
 using ARS.ContractTemplating.Domain.Enums;
 
 namespace ARS.ContractTemplating.Domain.Models.Messages;
 /// <summary>
 /// Model for Contract Request Files
 /// </summary>
+[ExcludeFromCodeCoverage]
 public class ContractRequestFile
 {
     /// <summary>
