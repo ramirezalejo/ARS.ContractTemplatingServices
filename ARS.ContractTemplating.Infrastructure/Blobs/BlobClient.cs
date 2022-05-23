@@ -26,7 +26,8 @@ public class BlobClient : BlobServiceClient, IBlobClient
     public async Task UploadBlobAsync(string containerName, string blobName, MemoryStream stream,
         CancellationToken cancellationToken)
     {
-        BlobContainerClient containerClient = await CreateBlobContainerAsync(containerName, cancellationToken: cancellationToken);
+        BlobContainerClient containerClient = GetBlobContainerClient(containerName);
+        await containerClient.CreateIfNotExistsAsync(cancellationToken: cancellationToken);
         await containerClient.UploadBlobAsync(blobName, stream, cancellationToken);
     }
 }
