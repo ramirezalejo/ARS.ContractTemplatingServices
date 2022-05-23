@@ -3,7 +3,7 @@
     "Values": {
         "AzureWebJobsStorage": "UseDevelopmentStorage=true",
         "FUNCTIONS_WORKER_RUNTIME": "dotnet",
-        "StorageConnectionString": "UseDevelopmentStorage=true",,
+        "StorageConnectionString": "UseDevelopmentStorage=true",
         "CognitiveSearchSubscriptionKey": "1234",
         "CognitiveSearchEndpoint": "https://test.cognitiveservices.azure.com/"
     }
