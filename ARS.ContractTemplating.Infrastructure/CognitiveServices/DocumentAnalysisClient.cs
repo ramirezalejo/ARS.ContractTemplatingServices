@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using ARS.ContractTemplating.Domain.Interfaces.Infrastructure;
 using Azure;
+using Azure.Core;
 
 namespace ARS.ContractTemplating.Infrastructure.CognitiveServices;
 using Azure = Azure.AI.FormRecognizer.DocumentAnalysis;
@@ -29,8 +30,24 @@ public class DocumentAnalysisClient : Azure.DocumentAnalysisClient, IDocumentAna
     public async Task<Dictionary<string, string?>> AnalyzeDocumentFromUriAsync(string url)
     {
         Uri fileUri = new Uri (url);
-        Azure.AnalyzeDocumentOperation operation = await StartAnalyzeDocumentFromUriAsync("prebuilt-document", fileUri);
+        Azure.AnalyzeDocumentOperation operation = await StartAnalyzeDocumentFromUriAsync("prebuilt-read", fileUri);
         await operation.WaitForCompletionAsync();
+        return operation.Value.KeyValuePairs
+                   ?.ToDictionary(x => x.Key.Content, x => x.Value?.Content)
+               ?? new Dictionary<string, string?>();
+
+    }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="stream"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<Dictionary<string, string?>> AnalyzeDocumentFromStreamAsync(Stream stream, CancellationToken cancellationToken)
+    {
+        Azure.AnalyzeDocumentOperation operation = await StartAnalyzeDocumentAsync("prebuilt-read", stream, cancellationToken : cancellationToken);
+        await operation.WaitForCompletionAsync(cancellationToken);
         return operation.Value.KeyValuePairs
                    ?.ToDictionary(x => x.Key.Content, x => x.Value?.Content)
                ?? new Dictionary<string, string?>();

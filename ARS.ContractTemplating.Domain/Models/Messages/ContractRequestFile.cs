@@ -18,5 +18,14 @@ public class ContractRequestFile
     /// </summary>
     public FileRoleType FileRoleType { get; set; }
     
+    /// <summary>
+    /// Blob Container name
+    /// </summary>
+    public string? ContainerName { get; set; }
+
+    /// <summary>
+    /// Blob Name
+    /// </summary>
+    public string? BlobName { get; set; }
     
 }

@@ -11,7 +11,7 @@ namespace ARS.ContractTemplating.Functions.Tests;
 public class ContractTemplateRequestTests
 {
     private IContractsService? _contractService;
-    private ILogger? _logger;
+    private ILogger<ContractTemplateRequest>? _logger;
     private Fixture? _fixture;
     private string? _requestMessage;
 
@@ -20,7 +20,7 @@ public class ContractTemplateRequestTests
     public void Setup()
     {
         _contractService = Substitute.For<IContractsService>();
-        _logger = Substitute.For<ILogger>();
+        _logger = Substitute.For<ILogger<ContractTemplateRequest>>();
         _fixture = new Fixture();
         _requestMessage = JsonSerializer.Serialize(_fixture.Create<ContractRequestMessage>());
     }

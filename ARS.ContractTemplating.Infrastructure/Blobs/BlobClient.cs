@@ -31,4 +31,19 @@ public class BlobClient : BlobServiceClient, IBlobClient
         await blobClient.UploadAsync(stream, cancellationToken: cancellationToken);
         return blobClient.Uri.AbsoluteUri;
     }
+
+    /// <summary>
+    /// Download blob to stream
+    /// </summary>
+    /// <param name="containerName"></param>
+    /// <param name="blobName"></param>
+    /// <returns></returns>
+    public async Task<Stream> DownloadBlobsAsStreamAsync(string containerName, string blobName)
+    {
+        BlobContainerClient containerClient = GetBlobContainerClient(containerName);
+        var blobClient = containerClient.GetBlobClient(blobName);
+        var stream = new MemoryStream();
+        await blobClient.DownloadToAsync(stream);
+        return stream;
+    }
 }

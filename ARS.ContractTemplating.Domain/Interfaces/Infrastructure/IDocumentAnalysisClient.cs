@@ -11,4 +11,13 @@ public interface IDocumentAnalysisClient
     /// <param name="url"></param>
     /// <returns></returns>
     Task<Dictionary<string, string?>> AnalyzeDocumentFromUriAsync(string url);
+
+    /// <summary>
+    /// Extract data from doc/image stream 
+    /// </summary>
+    /// <param name="stream"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<Dictionary<string, string?>>
+        AnalyzeDocumentFromStreamAsync(Stream stream, CancellationToken cancellationToken);
 }

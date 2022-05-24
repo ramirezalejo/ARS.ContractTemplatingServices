@@ -14,4 +14,12 @@ public interface IBlobClient
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task<string> UploadBlobAsync(string containerName, string blobName, MemoryStream stream, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Download blob to stream
+    /// </summary>
+    /// <param name="containerName"></param>
+    /// <param name="blobName"></param>
+    /// <returns></returns>
+    Task<Stream> DownloadBlobsAsStreamAsync(string containerName, string blobName);
 }

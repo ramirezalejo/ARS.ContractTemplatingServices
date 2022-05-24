@@ -22,7 +22,7 @@ public class ContractTemplateRequest
     /// </summary>
     /// <param name="contractService"></param>
     /// <param name="logger"></param>
-    public ContractTemplateRequest(IContractsService contractService, ILogger logger)
+    public ContractTemplateRequest(IContractsService contractService, ILogger<ContractTemplateRequest> logger)
     {
         _contractService = contractService;
         _logger = logger;

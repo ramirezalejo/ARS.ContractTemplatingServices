@@ -26,4 +26,5 @@ public class ContractRequestMessage
     /// Contract template Id
     /// </summary>
     public string? TemplateId { get; set; }
+    
 }

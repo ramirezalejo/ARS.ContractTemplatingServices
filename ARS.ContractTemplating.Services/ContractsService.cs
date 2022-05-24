@@ -28,7 +28,7 @@ public class ContractsService : IContractsService
     public ContractsService(
         IDocumentAnalysisClient documentAnalysisClient,
         IBlobClient blobClient,
-        ILogger logger)
+        ILogger<ContractsService> logger)
     {
         _documentAnalysisClient = documentAnalysisClient;
         _blobClient = blobClient;
@@ -42,30 +42,48 @@ public class ContractsService : IContractsService
     /// <param name="cancellationToken"></param>
     public async Task GenerateContract(ContractRequestMessage requestMessage, CancellationToken cancellationToken)
     {
-        var buyerFile = requestMessage?.Files?.FirstOrDefault(x => x.FileRoleType == FileRoleType.Buyer);
-        var buyerDataFromFile = buyerFile is not null
-            ? await _documentAnalysisClient.AnalyzeDocumentFromUriAsync(buyerFile.FilePath ??
-                                                                        throw new InvalidOperationException())
-            : new Dictionary<string, string?>();
+        var buyerFile = requestMessage?.Files?.First(x => x.FileRoleType == FileRoleType.Seller);
+        try
+        {
+            Dictionary<string, string?> buyerDataFromFile;
+            if (buyerFile != null && !string.IsNullOrWhiteSpace(buyerFile.ContainerName) && !string.IsNullOrWhiteSpace(buyerFile.BlobName))
+            {
+                buyerDataFromFile = await _documentAnalysisClient.AnalyzeDocumentFromStreamAsync(
+                    await _blobClient.DownloadBlobsAsStreamAsync(buyerFile.ContainerName, buyerFile.BlobName),
+                    cancellationToken);
+            }
+            else
+            {
+                buyerDataFromFile = buyerFile is not null
+                    ? await _documentAnalysisClient.AnalyzeDocumentFromUriAsync(buyerFile.FilePath ??
+                        throw new InvalidOperationException())
+                    : new Dictionary<string, string?>();
+            }
+            buyerDataFromFile.TryGetValue("NOMBRES", out var firstName);
+            buyerDataFromFile.TryGetValue("APELLIDOS", out var lastName);
+            buyerDataFromFile.TryGetValue("CEDULA DE CIUDADANIA", out var identification);
+            var buyer = new Buyer($"{firstName} {lastName}",
+                "CC",
+                identification ?? "1234",
+                new Address()
+            );
 
-        buyerDataFromFile.TryGetValue("Nombres", out var firstName);
-        buyerDataFromFile.TryGetValue("Apellidos", out var lastName);
-        buyerDataFromFile.TryGetValue("CEDULA DE CIUDADANIA", out var identification);
-        var buyer = new Buyer($"{firstName} {lastName}",
-            "CC",
-            identification ?? "1234",
-            new Address()
-        );
+            var seller = new Seller($"{firstName} {lastName}",
+                "CC",
+                identification ?? "1234",
+                new Address()
+            );
+            var model = new BuyAndSell(buyer, seller, new string[0], 0);
+            var doc = new BuyAndSellContractAgreement(model).GeneratePdf();
 
-        var seller = new Seller($"{firstName} {lastName}",
-            "CC",
-            identification ?? "1234",
-            new Address()
-        );
-        var model = new BuyAndSell(buyer, seller, new string[0], 0);
-        var doc = new BuyAndSellContractAgreement(model).GeneratePdf();
-
-        using MemoryStream stream = new MemoryStream(doc);
-        await _blobClient.UploadBlobAsync("result", "Contrato1", stream, cancellationToken);
+            using MemoryStream stream = new MemoryStream(doc);
+            await _blobClient.UploadBlobAsync("result", "Contrato1", stream, cancellationToken);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+        
     }
 }
