@@ -42,7 +42,7 @@ public class ContractsService : IContractsService
     /// <param name="cancellationToken"></param>
     public async Task GenerateContract(ContractRequestMessage requestMessage, CancellationToken cancellationToken)
     {
-        var buyerFile = requestMessage?.Files?.First(x => x.FileRoleType == FileRoleType.Seller);
+        var buyerFile = requestMessage.Files?.FirstOrDefault(x => x.FileRoleType == FileRoleType.Seller);
         try
         {
             Dictionary<string, string?> buyerDataFromFile;
@@ -81,7 +81,7 @@ public class ContractsService : IContractsService
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            _logger.LogError(e, "Error processing contract request");
             throw;
         }
         
