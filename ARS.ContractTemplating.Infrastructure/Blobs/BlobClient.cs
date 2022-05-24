@@ -41,6 +41,7 @@ public class BlobClient : BlobServiceClient, IBlobClient
     public async Task<Stream> DownloadBlobsAsStreamAsync(string containerName, string blobName)
     {
         BlobContainerClient containerClient = GetBlobContainerClient(containerName);
+        await containerClient.CreateIfNotExistsAsync();
         var blobClient = containerClient.GetBlobClient(blobName);
         var stream = new MemoryStream();
         await blobClient.DownloadToAsync(stream);
