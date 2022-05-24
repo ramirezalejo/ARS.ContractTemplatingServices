@@ -44,7 +44,7 @@ public class ContractsServiceTests
         _documentAnalysisClient.AnalyzeDocumentFromStreamAsync(Arg.Any<Stream>(), Arg.Any<CancellationToken>())
             .Returns(Task.FromResult(new Dictionary<string, string?>()));
             
-        _blobClient.DownloadBlobsAsStreamAsync(Arg.Any<string>(), Arg.Any<string>()).Returns(Task.FromResult(Stream.Null));
+        _blobClient.DownloadBlobsAsStreamAsync(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<CancellationToken>()).Returns(Task.FromResult(Stream.Null));
         //Act
         Debug.Assert(_requestMessage != null, nameof(_requestMessage) + " != null");
         await contractsService.GenerateContract(_requestMessage, default);

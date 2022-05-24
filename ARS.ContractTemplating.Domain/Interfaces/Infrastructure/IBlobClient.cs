@@ -20,6 +20,7 @@ public interface IBlobClient
     /// </summary>
     /// <param name="containerName"></param>
     /// <param name="blobName"></param>
+    /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<Stream> DownloadBlobsAsStreamAsync(string containerName, string blobName);
+    Task<Stream> DownloadBlobsAsStreamAsync(string containerName, string blobName, CancellationToken cancellationToken);
 }

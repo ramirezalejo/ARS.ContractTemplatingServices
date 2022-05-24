@@ -27,6 +27,7 @@ public class BlobClient : BlobServiceClient, IBlobClient
         CancellationToken cancellationToken)
     {
         BlobContainerClient containerClient = GetBlobContainerClient(containerName);
+        await containerClient.CreateIfNotExistsAsync(cancellationToken: cancellationToken);
         var blobClient = containerClient.GetBlobClient(blobName);
         await blobClient.UploadAsync(stream, cancellationToken: cancellationToken);
         return blobClient.Uri.AbsoluteUri;
@@ -37,14 +38,14 @@ public class BlobClient : BlobServiceClient, IBlobClient
     /// </summary>
     /// <param name="containerName"></param>
     /// <param name="blobName"></param>
+    /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<Stream> DownloadBlobsAsStreamAsync(string containerName, string blobName)
+    public async Task<Stream> DownloadBlobsAsStreamAsync(string containerName, string blobName, CancellationToken cancellationToken)
     {
         BlobContainerClient containerClient = GetBlobContainerClient(containerName);
-        await containerClient.CreateIfNotExistsAsync();
         var blobClient = containerClient.GetBlobClient(blobName);
         var stream = new MemoryStream();
-        await blobClient.DownloadToAsync(stream);
+        await blobClient.DownloadToAsync(stream, cancellationToken);
         return stream;
     }
 }

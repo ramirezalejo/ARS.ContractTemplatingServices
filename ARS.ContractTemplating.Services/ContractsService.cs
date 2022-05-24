@@ -49,7 +49,7 @@ public class ContractsService : IContractsService
             if (buyerFile != null && !string.IsNullOrWhiteSpace(buyerFile.ContainerName) && !string.IsNullOrWhiteSpace(buyerFile.BlobName))
             {
                 buyerDataFromFile = await _documentAnalysisClient.AnalyzeDocumentFromStreamAsync(
-                    await _blobClient.DownloadBlobsAsStreamAsync(buyerFile.ContainerName, buyerFile.BlobName),
+                    await _blobClient.DownloadBlobsAsStreamAsync(buyerFile.ContainerName, buyerFile.BlobName, cancellationToken),
                     cancellationToken);
             }
             else
