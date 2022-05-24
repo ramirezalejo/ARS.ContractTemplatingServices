@@ -1,5 +1,6 @@
 using ARS.ContractTemplating.Domain.Interfaces.Infrastructure;
 using Azure.Storage.Blobs;
+using Azure.Storage.Sas;
 
 namespace ARS.ContractTemplating.Infrastructure.Blobs;
 
@@ -47,5 +48,18 @@ public class BlobClient : BlobServiceClient, IBlobClient
         var stream = new MemoryStream();
         await blobClient.DownloadToAsync(stream, cancellationToken);
         return stream;
+    }
+
+    /// <summary>
+    /// Gets a SAS with 5 min lifespan to the provided blob
+    /// </summary>
+    /// <param name="containerName"></param>
+    /// <param name="blobName"></param>
+    /// <returns></returns>
+    public Uri GetBlobSasUrl(string containerName, string blobName)
+    {
+        BlobContainerClient containerClient = GetBlobContainerClient(containerName);
+        var blobClient = containerClient.GetBlobClient(blobName);
+        return blobClient.GenerateSasUri(BlobSasPermissions.Read, DateTimeOffset.UtcNow + TimeSpan.FromSeconds(300));
     }
 }

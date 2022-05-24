@@ -48,15 +48,20 @@ public class ContractsService : IContractsService
             Dictionary<string, string?> buyerDataFromFile;
             if (buyerFile != null && !string.IsNullOrWhiteSpace(buyerFile.ContainerName) && !string.IsNullOrWhiteSpace(buyerFile.BlobName))
             {
-                buyerDataFromFile = await _documentAnalysisClient.AnalyzeDocumentFromStreamAsync(
-                    await _blobClient.DownloadBlobsAsStreamAsync(buyerFile.ContainerName, buyerFile.BlobName, cancellationToken),
-                    cancellationToken);
+                string locale = "es-ES";
+                var pages = new List<string>(){"1"};
+                
+                buyerDataFromFile = await _documentAnalysisClient.AnalyzeDocumentFromUriWithSettingsAsync(
+                    _blobClient.GetBlobSasUrl(buyerFile.ContainerName, buyerFile.BlobName),
+                    locale, pages, cancellationToken);
             }
             else
             {
+                string locale = "es-ES";
+                var pages = new List<string>(){"1"};
                 buyerDataFromFile = buyerFile is not null
-                    ? await _documentAnalysisClient.AnalyzeDocumentFromUriAsync(buyerFile.FilePath ??
-                        throw new InvalidOperationException())
+                    ? await _documentAnalysisClient.AnalyzeDocumentFromUrlWithSettingsAsync(buyerFile.FilePath ??
+                        throw new InvalidOperationException(), locale, pages, cancellationToken)
                     : new Dictionary<string, string?>();
             }
             buyerDataFromFile.TryGetValue("NOMBRES", out var firstName);

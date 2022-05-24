@@ -23,4 +23,12 @@ public interface IBlobClient
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task<Stream> DownloadBlobsAsStreamAsync(string containerName, string blobName, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Get the Uri with SAS access for the specified blob
+    /// </summary>
+    /// <param name="containerName"></param>
+    /// <param name="blobName"></param>
+    /// <returns></returns>
+    Uri GetBlobSasUrl(string containerName, string blobName);
 }

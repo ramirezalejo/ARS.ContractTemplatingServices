@@ -70,7 +70,7 @@ public class ContractsServiceTests
             Debug.Assert(_blobClient != null, nameof(_blobClient) + " != null");
             var contractsService = new ContractsService(_documentAnalysisClient, _blobClient, _logger);
             // _cognitiveServicesClient.ReadFileUrl(Arg.Any<string>()).Returns(Task.FromResult(new List<string>()));
-            _documentAnalysisClient.AnalyzeDocumentFromUriAsync(Arg.Any<string>())
+            _documentAnalysisClient.AnalyzeDocumentFromUrlAsync(Arg.Any<string>(), Arg.Any<CancellationToken>())
                 .Returns(Task.FromResult(new Dictionary<string, string?>()));
             //Act
             Debug.Assert(_requestMessage != null, nameof(_requestMessage) + " != null");
