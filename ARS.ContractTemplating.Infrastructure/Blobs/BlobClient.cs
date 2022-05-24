@@ -1,4 +1,4 @@
-using ARS.ContractTemplating.Domain.Contracts.Infrastructure;
+using ARS.ContractTemplating.Domain.Interfaces.Infrastructure;
 using Azure.Storage.Blobs;
 
 namespace ARS.ContractTemplating.Infrastructure.Blobs;
@@ -17,17 +17,18 @@ public class BlobClient : BlobServiceClient, IBlobClient
     }
 
     /// <summary>
-    /// Upload provided file as stream to storage
+    /// Upload provided file as stream to storage and returns the blob url
     /// </summary>
     /// <param name="containerName"></param>
     /// <param name="blobName"></param>
     /// <param name="stream"></param>
     /// <param name="cancellationToken"></param>
-    public async Task UploadBlobAsync(string containerName, string blobName, MemoryStream stream,
+    public async Task<string> UploadBlobAsync(string containerName, string blobName, MemoryStream stream,
         CancellationToken cancellationToken)
     {
         BlobContainerClient containerClient = GetBlobContainerClient(containerName);
-        await containerClient.CreateIfNotExistsAsync(cancellationToken: cancellationToken);
-        await containerClient.UploadBlobAsync(blobName, stream, cancellationToken);
+        var blobClient = containerClient.GetBlobClient(blobName);
+        await blobClient.UploadAsync(stream, cancellationToken: cancellationToken);
+        return blobClient.Uri.AbsoluteUri;
     }
 }

@@ -1,4 +1,4 @@
-namespace ARS.ContractTemplating.Domain.Contracts.Infrastructure;
+namespace ARS.ContractTemplating.Domain.Interfaces.Infrastructure;
 /// <summary>
 /// Contract to hide implementation for Cognitive service client
 /// </summary>

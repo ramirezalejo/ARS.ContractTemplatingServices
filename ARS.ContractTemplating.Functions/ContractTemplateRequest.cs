@@ -2,7 +2,7 @@ using System;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Threading;
-using ARS.ContractTemplating.Domain.Contracts.Services;
+using ARS.ContractTemplating.Domain.Interfaces.Services;
 using ARS.ContractTemplating.Domain.Models.Messages;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
@@ -39,6 +39,7 @@ public class ContractTemplateRequest
     {
         _logger.LogInformation("C# Queue trigger function processed: {MyQueueItem}", myQueueItem);
         var request = JsonSerializer.Deserialize<ContractRequestMessage>(myQueueItem);
-        await _contractService.GenerateContract(request ?? throw new InvalidOperationException("Queue Message cannot be deserialized to ContractRequestMessage object"));
+        await _contractService.GenerateContract(request ?? throw new InvalidOperationException("Queue Message cannot be deserialized to ContractRequestMessage object"), 
+            cancellationToken);
     }
 }

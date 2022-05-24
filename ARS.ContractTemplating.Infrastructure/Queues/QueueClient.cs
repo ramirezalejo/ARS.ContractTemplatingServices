@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
-using ARS.ContractTemplating.Domain.Contracts;
-using ARS.ContractTemplating.Domain.Contracts.Infrastructure;
+using ARS.ContractTemplating.Domain.Interfaces;
+using ARS.ContractTemplating.Domain.Interfaces.Infrastructure;
 using Azure.Storage.Queues;
 
 namespace ARS.ContractTemplating.Infrastructure.Queues;

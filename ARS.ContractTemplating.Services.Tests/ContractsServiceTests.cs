@@ -1,5 +1,5 @@
 using System.Diagnostics;
-using ARS.ContractTemplating.Domain.Contracts.Infrastructure;
+using ARS.ContractTemplating.Domain.Interfaces.Infrastructure;
 using ARS.ContractTemplating.Domain.Models.Messages;
 using AutoFixture;
 using Microsoft.Extensions.Logging;
@@ -7,36 +7,45 @@ using NSubstitute;
 using NUnit.Framework;
 
 namespace ARS.ContractTemplating.Services.Tests;
+
 [TestFixture]
 public class ContractsServiceTests
 {
-    private ICognitiveServicesClient? _cognitiveServicesClient;
+    //private ICognitiveServicesClient? _cognitiveServicesClient;
+    private IDocumentAnalysisClient? _documentAnalysisClient;
+    private IBlobClient? _blobClient;
     private ILogger? _logger;
     private ContractRequestMessage? _requestMessage;
     private Fixture? _fixture;
-    
+
     //Setup
     [SetUp]
     public void Setup()
     {
-        _cognitiveServicesClient = Substitute.For<ICognitiveServicesClient>();
+        // _cognitiveServicesClient = Substitute.For<ICognitiveServicesClient>();
+        _documentAnalysisClient = Substitute.For<IDocumentAnalysisClient>();
+        _blobClient = Substitute.For<IBlobClient>();
         _logger = Substitute.For<ILogger>();
         _fixture = new Fixture();
         _requestMessage = _fixture.Create<ContractRequestMessage>();
     }
-    
-    
+
+
     [Test]
     public async Task GenerateContracts_Succeeded()
     {
         //Arrange
-        Debug.Assert(_cognitiveServicesClient != null, nameof(_cognitiveServicesClient) + " != null");
+        //Debug.Assert(_cognitiveServicesClient != null, nameof(_cognitiveServicesClient) + " != null");
         Debug.Assert(_logger != null, nameof(_logger) + " != null");
-        var contractsService = new ContractsService(_cognitiveServicesClient, _logger);
-        _cognitiveServicesClient.ReadFileUrl(Arg.Any<string>()).Returns(Task.FromResult(new List<string>()));
+        Debug.Assert(_documentAnalysisClient != null, nameof(_documentAnalysisClient) + " != null");
+        Debug.Assert(_blobClient != null, nameof(_blobClient) + " != null");
+        var contractsService = new ContractsService(_documentAnalysisClient, _blobClient, _logger);
+        // _cognitiveServicesClient.ReadFileUrl(Arg.Any<string>()).Returns(Task.FromResult(new List<string>()));
+        _documentAnalysisClient.AnalyzeDocumentFromUriAsync(Arg.Any<string>())
+            .Returns(Task.FromResult(new Dictionary<string, string?>()));
         //Act
         Debug.Assert(_requestMessage != null, nameof(_requestMessage) + " != null");
-        await contractsService.GenerateContract(_requestMessage);
+        await contractsService.GenerateContract(_requestMessage, default);
 
         //Assert
         Assert.Pass();

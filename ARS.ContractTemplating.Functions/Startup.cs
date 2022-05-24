@@ -1,9 +1,10 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
-using ARS.ContractTemplating.Domain.Contracts.Infrastructure;
-using ARS.ContractTemplating.Domain.Contracts.Services;
+using ARS.ContractTemplating.Domain.Interfaces.Infrastructure;
+using ARS.ContractTemplating.Domain.Interfaces.Services;
 using ARS.ContractTemplating.Infrastructure.Blobs;
 using ARS.ContractTemplating.Infrastructure.CognitiveServices;
+using ARS.ContractTemplating.Infrastructure.Queues;
 using ARS.ContractTemplating.Services;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
@@ -37,11 +38,14 @@ public class Startup : FunctionsStartup
                 configuration.GetValue<string>("CognitiveSearchEndpoint"),
                 configuration.GetValue<string>("CognitiveSearchSubscriptionKey"),
                 x.GetRequiredService<ILogger>()));
+        builder.Services.AddSingleton<IDocumentAnalysisClient>
+        (new DocumentAnalysisClient(configuration.GetValue<string>("FormRecognizerSubscriptionKey"),
+            configuration.GetValue<string>("FormRecognizerEndpoint")));
         /*builder.Services.AddSingleton<IQueueClient>(x =>
             new QueueClient(configuration.GetValue<string>("StorageConnectionString"), "ContractRequest"));*/
         builder.Services.AddSingleton<IBlobClient>(x =>
             new BlobClient(configuration.GetValue<string>("StorageConnectionString")));
         builder.Services.AddTransient<IContractsService, ContractsService>();
-
+        
     }
 }

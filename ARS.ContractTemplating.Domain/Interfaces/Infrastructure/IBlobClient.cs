@@ -1,4 +1,4 @@
-namespace ARS.ContractTemplating.Domain.Contracts.Infrastructure;
+namespace ARS.ContractTemplating.Domain.Interfaces.Infrastructure;
 
 /// <summary>
 /// Interface for Blob interactions
@@ -13,5 +13,5 @@ public interface IBlobClient
     /// <param name="stream"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task UploadBlobAsync(string containerName, string blobName, MemoryStream stream, CancellationToken cancellationToken);
+    Task<string> UploadBlobAsync(string containerName, string blobName, MemoryStream stream, CancellationToken cancellationToken);
 }

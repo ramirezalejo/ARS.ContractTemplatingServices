@@ -1,5 +1,5 @@
 using System.Text.Json;
-using ARS.ContractTemplating.Domain.Contracts.Services;
+using ARS.ContractTemplating.Domain.Interfaces.Services;
 using ARS.ContractTemplating.Domain.Models.Messages;
 using AutoFixture;
 using Microsoft.Extensions.Logging;
