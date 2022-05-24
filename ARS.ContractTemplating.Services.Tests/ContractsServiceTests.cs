@@ -57,6 +57,8 @@ public class ContractsServiceTests
         public async Task GenerateContracts__SucceeFromUrlded()
         {
             //Arrange
+            Debug.Assert(_requestMessage != null, nameof(_requestMessage) + " != null");
+            Debug.Assert(_requestMessage.Files != null, "_requestMessage.Files != null");
             foreach (var file in _requestMessage.Files)
             {
                 file.ContainerName = null;
