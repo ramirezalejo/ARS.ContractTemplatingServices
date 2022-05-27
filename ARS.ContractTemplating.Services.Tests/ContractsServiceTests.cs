@@ -32,7 +32,7 @@ public class ContractsServiceTests
 
 
     [Test]
-    public async Task GenerateContracts__SucceededFromStream()
+    public async Task GenerateContracts_FromUri_Succeeded()
     {
         //Arrange
         //Debug.Assert(_cognitiveServicesClient != null, nameof(_cognitiveServicesClient) + " != null");
@@ -41,7 +41,7 @@ public class ContractsServiceTests
         Debug.Assert(_blobClient != null, nameof(_blobClient) + " != null");
         var contractsService = new ContractsService(_documentAnalysisClient, _blobClient, _logger);
         // _cognitiveServicesClient.ReadFileUrl(Arg.Any<string>()).Returns(Task.FromResult(new List<string>()));
-        _documentAnalysisClient.AnalyzeDocumentFromStreamAsync(Arg.Any<Stream>(), Arg.Any<CancellationToken>())
+        _documentAnalysisClient.AnalyzeDocumentFromUriWithSettingsAsync(Arg.Any<Uri>(), Arg.Any<string>(), Arg.Any<List<string>>(), Arg.Any<CancellationToken>())
             .Returns(Task.FromResult(new Dictionary<string, string?>()));
             
         _blobClient.DownloadBlobsAsStreamAsync(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<CancellationToken>()).Returns(Task.FromResult(Stream.Null));
@@ -50,11 +50,13 @@ public class ContractsServiceTests
         await contractsService.GenerateContract(_requestMessage, default);
 
         //Assert
+        await _blobClient.Received(1).UploadBlobAsync(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<MemoryStream>(),
+            Arg.Any<CancellationToken>());
         Assert.Pass();
     }
     
     [Test]
-        public async Task GenerateContracts__SucceeFromUrlded()
+        public async Task GenerateContracts_FromUrl_Succeeded()
         {
             //Arrange
             Debug.Assert(_requestMessage != null, nameof(_requestMessage) + " != null");
@@ -70,13 +72,15 @@ public class ContractsServiceTests
             Debug.Assert(_blobClient != null, nameof(_blobClient) + " != null");
             var contractsService = new ContractsService(_documentAnalysisClient, _blobClient, _logger);
             // _cognitiveServicesClient.ReadFileUrl(Arg.Any<string>()).Returns(Task.FromResult(new List<string>()));
-            _documentAnalysisClient.AnalyzeDocumentFromUrlAsync(Arg.Any<string>(), Arg.Any<CancellationToken>())
+            _documentAnalysisClient.AnalyzeDocumentFromUrlWithSettingsAsync(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<List<string>>(),Arg.Any<CancellationToken>())
                 .Returns(Task.FromResult(new Dictionary<string, string?>()));
             //Act
             Debug.Assert(_requestMessage != null, nameof(_requestMessage) + " != null");
             await contractsService.GenerateContract(_requestMessage, default);
     
             //Assert
+            await _blobClient.Received(1).UploadBlobAsync(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<MemoryStream>(),
+                Arg.Any<CancellationToken>());
             Assert.Pass();
         }
 }

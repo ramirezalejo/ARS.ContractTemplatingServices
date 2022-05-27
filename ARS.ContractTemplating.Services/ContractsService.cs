@@ -50,10 +50,10 @@ public class ContractsService : IContractsService
             {
                 string locale = "es-ES";
                 var pages = new List<string>(){"1"};
-                
+
                 buyerDataFromFile = await _documentAnalysisClient.AnalyzeDocumentFromUriWithSettingsAsync(
                     _blobClient.GetBlobSasUrl(buyerFile.ContainerName, buyerFile.BlobName),
-                    locale, pages, cancellationToken);
+                    locale, pages, cancellationToken) ?? new Dictionary<string, string?>();
             }
             else
             {
@@ -66,7 +66,7 @@ public class ContractsService : IContractsService
             }
             buyerDataFromFile.TryGetValue("NOMBRES", out var firstName);
             buyerDataFromFile.TryGetValue("APELLIDOS", out var lastName);
-            buyerDataFromFile.TryGetValue("CEDULA DE CIUDADANIA", out var identification);
+            buyerDataFromFile.TryGetValue("IDENTIFICACION", out var identification);
             var buyer = new Buyer($"{firstName} {lastName}",
                 "CC",
                 identification ?? "1234",
@@ -78,11 +78,11 @@ public class ContractsService : IContractsService
                 identification ?? "1234",
                 new Address()
             );
-            var model = new BuyAndSell(buyer, seller, new string[0], 0);
+            var model = new BuyAndSell(buyer, seller, Array.Empty<string>(), 0);
             var doc = new BuyAndSellContractAgreement(model).GeneratePdf();
 
             using MemoryStream stream = new MemoryStream(doc);
-            await _blobClient.UploadBlobAsync("result", "Contrato1", stream, cancellationToken);
+            await _blobClient.UploadBlobAsync("result", "Contrato1.pdf", stream, cancellationToken);
         }
         catch (Exception e)
         {
