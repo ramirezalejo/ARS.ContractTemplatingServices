@@ -14,6 +14,16 @@
 
     <ItemGroup>
       <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
+      <PackageReference Include="QuestPDF" Version="2022.5.0" />
     </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ARS.ContractTemplating.Domain\ARS.ContractTemplating.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="CognitiveServices" />
+    </ItemGroup>
+    
 
 </Project>

@@ -1,13 +1,16 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace ARS.ContractTemplating.Domain.Models.Messages;
 /// <summary>
 /// Model for ContractRequest Queue and Interactions
 /// </summary>
+[ExcludeFromCodeCoverage]
 public class ContractRequestMessage
 {
     /// <summary>
     /// List of file to use for contract
     /// </summary>
-    public ContractRequestFile[]? File { get; set; }
+    public ContractRequestFile[]? Files { get; set; }
 
     /// <summary>
     /// Contract Requestor/ Request Owner
@@ -23,4 +26,5 @@ public class ContractRequestMessage
     /// Contract template Id
     /// </summary>
     public string? TemplateId { get; set; }
+    
 }

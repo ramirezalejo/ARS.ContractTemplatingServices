@@ -15,6 +15,10 @@ public enum FileRoleType
     /// <summary>
     ///  Contract Witness
     /// </summary>
-    Witness 
+    Witness,
+    /// <summary>
+    /// 
+    /// </summary>
+    AssetDetails
     
 }
